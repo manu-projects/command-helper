@@ -1,5 +1,11 @@
-## CATEGORIA: operaciones con archivos
-## DESCRIPCION: leer de la (stdin) e imprimir en la (stdout) lo que escribe en archivos
+## ####################################################################
+## ACTUALIZADO: 24/03/2023
+##
+## CATEGORIA: redireccionar información
+## DESCRIPCION: leer de la (stdin) + escribir en uno o varios archivos lo que se imprime en pantalla (stdout)
+##
+## OBSERVACIONES: -
+## ####################################################################
 
 # 1. Escribir en un archivo e imprimir en pantalla (escribir en STDOUT, file descriptor 1), el resultado de un comando que imprime en pantalla (STDOUT)
 #

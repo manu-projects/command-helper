@@ -1,5 +1,11 @@
-## CATEGORIA: clasificar comando
-## DESCRIPCION: describir comando
+## ####################################################################
+## ACTUALIZADO: 24/03/2023
+##
+## CATEGORIA: imprimir información de archivos
+## DESCRIPCION: cortar(eliminar) partes del contenido (por campo, byte ó caracter)
+##
+## OBSERVACIONES: -
+## ####################################################################
 
 # Listar el nombre de usuario de las cuentas del sistema que tengan la Shell Bash por default
 #

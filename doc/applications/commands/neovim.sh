@@ -1,5 +1,11 @@
+## ####################################################################
+## ACTUALIZADO: 24/03/2023
+##
 ## CATEGORIA: editor de texto
 ## DESCRIPCION: editor de texto basado en Vim
+##
+## OBSERVACIONES: -
+## ####################################################################
 
 # Desactivar las palabras resaltadas hasta la próxima búsqueda
 :noh

@@ -1,11 +1,17 @@
+## ####################################################################
+## ACTUALIZADO: 24/03/2023
+##
 ## CATEGORIA: documentación de comandos
 ## DESCRIPCION: obtiene una descripción corta del manual page (man)
+##
+## OBSERVACIONES: -
+## ####################################################################
 
-# obtener la descripción corta de un comando
+# Obtener la descripción corta de un comando
 whatis ls
 
-# es equivalente a usar `whatis`
+# (es equivalente a usar `whatis`)
 man -f ls
 
-# obtener la descripción corta de varios comandos
+# Obtener la descripción corta de varios comandos
 whatis ls cp rm mv

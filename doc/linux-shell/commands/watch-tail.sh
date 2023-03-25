@@ -1,5 +1,12 @@
-## CATEGORIA: operaciones con archivos
+## ####################################################################
+## ACTUALIZADO: 24/03/2023
+##
+## CATEGORIA: imprimir información de archivos
 ## DESCRIPCION: observar cambios de estado en archivos y directorios
+##
+## OBSERVACIONES: -
+## ####################################################################
+
 
 # observar cambios en un directorio (nuevos archivos, carpetas, ..)
 watch ls videos-favoritos/

@@ -1,5 +1,11 @@
-## CATEGORIA: clasificar comando
-## DESCRIPCION: describir comando
+## ####################################################################
+## ACTUALIZADO: 24/03/2023
+##
+## CATEGORIA: imprimir información de archivos
+## DESCRIPCION: elimina ó informa filas repetidas
+##
+## OBSERVACIONES: -
+## ####################################################################
 
 # Mostrar los 5 mensajes del syslog que más se repitan, y la cantidad de veces que se repiten
 cut --characters=17- /var/log/syslog | sort | uniq --count | sort --numeric-sort --reverse | head --lines=5
@@ -23,6 +29,7 @@ cut alumnos.txt --delimiter=',' --fields=2,3 | sort --key=1 | uniq --count
 cut alumnos.txt -d ',' -f 2,3 | sort -k 1 | uniq -c
 
 # Mostrar las lineas que se repiten (1 vez) y las que NO se repiten
+# (previamente ordenamos contenido, porque si las filas están desordenadas el comando uniq no funciona correctamente)
 sort syslog-alumnos.txt | uniq
 
 # Mostrar las lineas que se repiten (1 vez) y las que NO se repiten

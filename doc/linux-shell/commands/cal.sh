@@ -1,5 +1,11 @@
-## CATEGORIA: otros
+## ####################################################################
+## ACTUALIZADO: 24/03/2023
+##
+## CATEGORIA: fecha y hora del sistema
 ## DESCRIPCION: calendario
+##
+## OBSERVACIONES: -
+## ####################################################################
 
 # mostrar el mes actual del calendario (mes actual, año actual)
 cal

@@ -1,6 +1,11 @@
+## ####################################################################
+## ACTUALIZADO: 24/03/2023
+##
 ## CATEGORIA: información usuarios del sistema
 ## DESCRIPCION: mostrar información de los usuarios logeados y que comandos ejecutan
+##
 ## OBSERVACIONES: Agrupamos los comandos w, who, whoami, users
+## ####################################################################
 
 # Mostrar el nombre de usuario actual (Who am I?)
 whoami

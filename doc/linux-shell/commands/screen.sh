@@ -1,14 +1,20 @@
-## CATEGORIA: terminales
+## ####################################################################
+## ACTUALIZADO: 24/03/2023
+##
+## CATEGORIA: terminal de linux
 ## DESCRIPCION: multiplexor de terminales (crear multiples instancias de terminal en una sesión)
+##
+## OBSERVACIONES: -
+## ####################################################################
 
-# crear una sesión con nombre
+# Crear una sesión con nombre
 screen -S nombre
 
-# listar sesiones
+# Listar sesiones
 screen -ls
 
-# vincular una sesión (por nombre ó id) a la terminal actual
+# Vincular una sesión (por nombre ó id) a la terminal actual
 screen -r nombre
 
-# cerrar una sesión
+# Cerrar una sesión
 screen -X -S nombre quit

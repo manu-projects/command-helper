@@ -1,6 +1,11 @@
+## ####################################################################
+## ACTUALIZADO: 24/03/2023
+##
 ## CATEGORIA: información sobre los Procesos
-## DESCRIPCION: describir comando
-## NOTAS SUGERIDAS: tty-pts
+## DESCRIPCION: listar procesos y filtrar por criterios
+##
+## OBSERVACIONES: leer nota tty-pts
+## ####################################################################
 
 # Obtener pid de un proceso (de cualquier usuario logeado)
 pgrep firefox

@@ -1,6 +1,11 @@
+## ####################################################################
+## ACTUALIZADO: 24/03/2023
+##
 ## CATEGORIA: terminal de linux
 ## DESCRIPCION: grabar la sesión de una terminal (stdin y stdout) en un archivo de texto ascii
+##
 ## OBSERVACIONES: Agrupamos los comandos script, scriptreplay
+## ####################################################################
 
 # Grabar la sesión de la terminal actual
 # - el atajo Ctrl + D finaliza la grabación (ó el comando exit)

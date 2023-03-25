@@ -1,5 +1,11 @@
-## CATEGORIA: transferencia de datos
-## DESCRIPCION: operaciones de transferencia de datos (get, post, put, delete)
+## ####################################################################
+## ACTUALIZADO: 24/03/2023
+##
+## CATEGORIA: imprimir información de archivos
+## DESCRIPCION: muestra el contenido en columnas
+##
+## OBSERVACIONES: -
+## ####################################################################
 
 # descargar un archivo a la ruta actual (la opción -O es de output)
 curl -O https://www.gnu.org/licenses/gpl-3.0.txt

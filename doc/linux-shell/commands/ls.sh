@@ -1,26 +1,32 @@
-## CATEGORIA: operaciones con archivos
-## DESCRIPCION: listar directorios y archivos
+## ####################################################################
+## ACTUALIZADO: 24/03/2023
+##
+## CATEGORIA: imprimir información de archivos y directorios
+## DESCRIPCION: mostrar nombre y tipo de archivo, permisos de acceso, ...
+##
+## OBSERVACIONES: -
+## ####################################################################
 
-# contar cantidad de archivos/directorios
+# Contar cantidad de archivos/directorios
 ls | wc -c
 
-# filtrar las entradas del directorio sin usar `grep`
+# Filtrar las entradas del directorio sin usar `grep`
 ls *pdf
 
-# listar archivos ocultos
+# Listar archivos ocultos
 ls -la
 
-# listar archivos ordenados por fecha de creación/actualización
+# Listar archivos ordenados por fecha de creación/actualización
 ls -lt
 
-# listar archivos ordenados por tamaño del archivo
+# Listar archivos ordenados por tamaño del archivo
 ls -ls
 
-# listar archivos ordenados por tamaño del archivo (en un formato más entendible)
+# Listar archivos ordenados por tamaño del archivo (en un formato más entendible)
 ls -lsh
 
-# listar los 4 archivos más recientes
+# Listar los 4 archivos más recientes
 ls -lth | head -n4
 
-# listar los 2 archivos más antiguos
+# Listar los 2 archivos más antiguos
 ls -lth | tail -n2

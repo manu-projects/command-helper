@@ -1,5 +1,11 @@
-## CATEGORIA: clasificar aplicación
-## DESCRIPCION: describir aplicación
+## ####################################################################
+## ACTUALIZADO: 24/03/2023
+##
+## CATEGORIA: clasificar comando
+## DESCRIPCION: describir comando
+##
+## OBSERVACIONES: -
+## ####################################################################
 
 # un comentario, imprimimos un hola
 echo "hola"

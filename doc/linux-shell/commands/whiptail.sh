@@ -1,5 +1,11 @@
-## CATEGORIA: clasificar comando
-## DESCRIPCION: describir comando
+## ####################################################################
+## ACTUALIZADO: 24/03/2023
+##
+## CATEGORIA: cuadro de diálogo sin (GUI) Interfáz Gráfica
+## DESCRIPCION: interacción con el usuario desde la terminal
+##
+## OBSERVACIONES: -
+## ####################################################################
 
 # Cuadro de diálogo para notificar un mensaje al usuario
 #
@@ -15,8 +21,13 @@ reset; clear
 # - 2>&1 redirecciona STDERR al STDOUT, porque whiptail escribe los resultados en STDERR (fd 2) y muestra la caja de diálogo por STDOUT (fd 1)
 # - 1>/dev/tty redirecciona el STDOUT (fd 1) a la terminal activa (en uso), es opcional indicar el fd 1 porque el operador de redirección > lo  utiliza por default
 # - $? almacena el Estado de Salida del último comando ejecutado en la terminal (con valor 0 cero si tuvo éxito, distinto de cero si falló)
-whiptail --title "Borrar archivos" --yesno "Desea confirmar la acción?" 10 50 --yes-button "Confirmar" --no-button "Cancelar" 2>&1 1>/dev/tty \
-    && test $? -eq 0 && echo "Borrando archivos.." || echo "ok, decidiste no borrar los archivos"
+whiptail \
+    --title "Borrar archivos" \
+    --yesno "Desea confirmar la acción?" 10 50 \
+    --yes-button "Confirmar" \
+    --no-button "Cancelar" \
+    2>&1 1>/dev/tty;
+test $? -eq 0 && echo "Borrando archivos.." \ || echo "ok, decidiste no borrar los archivos"
 
 # Cuadro de diálogo que solicita escribir datos por STDIN (fd 0, teclado)
 #
@@ -24,17 +35,24 @@ whiptail --title "Borrar archivos" --yesno "Desea confirmar la acción?" 10 50 -
 # - el operador pipe (|) redirecciona el STDOUT (que escribió whiptail) como STDIN al comando xargs
 # - el comando xargs -I %, le define el símbolo % al input que le redireccionado por el operador pipe
 # - 3>&1 2>&1 2>&3 tiene mismo objetivo que 2>&1 1>/dev/tty, pero creando un nuevo File Descriptor (3) que referencia al STDOUT (fd 1) y al que redireccionará el STDERR (fd 2)
-whiptail --title "Crear usuario" --inputbox "Escriba el nombre de usuario" 10 50 "root" 3>&1 1>&2 2>&3 \
+whiptail \
+    --title "Crear usuario" \
+    --inputbox "Escriba el nombre de usuario" 10 50 "root" \
+    3>&1 1>&2 2>&3 \
     | xargs -I % echo "Hola %"
 
 # alternativa al whiptail --inputbox (pero sin la interfáz de whiptail)
-read -p "Escriba el nombre de usuario que desea crear: " NOMBRE
+read -p "Escriba el nombre de usuario que desea crear: " NOMBRE \
+     && echo "Bienvenido ${NOMBRE}"
 
 # Cuadro de diálogo con un menú de opciones
 #
 # - luego del alto (10) y ancho (50) de la caja de diálogo, indicamos el alto (2) del menú
 # - cada opción necesita dos valores de la forma: "nombre" "descripcion"
-whiptail --title "Cambiar de Shell" --menu "Seleccione una opción" 10 50 2 \ "Bash" "(Bourne Again Shell)" \ "Zsh" "(Z Shell)" 2>&1 1>/dev/tty \
+whiptail \
+    --title "Cambiar de Shell" \
+    --menu "Seleccione una opción" 10 50 2 \
+    "Bash" "(Bourne Again Shell)" \
+    "Zsh" "(Z Shell)" \
+    2>&1 1>/dev/tty \
     | xargs -I % echo "Cambiando a %"
-
-
