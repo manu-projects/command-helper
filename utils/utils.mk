@@ -6,6 +6,9 @@ APP_NAME=command-helper
 BASH_ALIAS_SYMBOL= ?
 BASH_ALIASES_FILE=~/.bash_aliases
 
+RUST_CARGO_BIN=/.cargo/bin
+RUST_CARGO_PATH="PATH=$${PATH}:$${HOME}$(RUST_CARGO_BIN)"
+
 BASH_ALIAS="alias $(BASH_ALIAS_SYMBOL)='make --no-print-directory -C $(CURRENT_DIRECTORY)' \
 	CURRENT_TTY_PATH=$$(pwd) \
 	APP_AUTHOR=$(APP_AUTHOR)"

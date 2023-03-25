@@ -23,16 +23,19 @@ COMANDOS = $(COMANDOS_LINUX) $(COMANDOS_APPS)
 
 .DEFAULT_GOAL=help
 
+# Nota: las primeras 8 lineas de los archivos .sh están reservadas para metadata
+#
 # TODO: refactor, definir una función de Makefile que reciba por parámetro el nombre de target y las dependencias
 $(DOC_LINUX).txt: $(DOC_COMANDOS_LINUX)
 	@$(TRUNCATE_CLEAR_CONTENT) $@
 	@$(foreach comando, $^,\
-		cat $(comando) | \
-		sed -n '$(CONTENT_NUMBER_LINE_CATEGORY),$(CONTENT_NUMBER_LINE_DESCRIPTION)p' | \
-		nawk 'BEGIN{print "$(basename $(notdir $(comando)))|" } {print $$0}' | \
-		sed -E 's/^\#\# ($(CONTENT_TAG_CATEGORY))\: (([[:alnum:]]|[[:space:]]|[[:punct:]])+)$$/\2\|/g' | \
-		sed -E 's/^\#\# ($(CONTENT_TAG_DESCRIPTION))\: (([[:alnum:]]|[[:space:]]|[[:punct:]])+)$$/\2;/g' | \
-		tr --delete '\n' | tr ';' '\n' \
+		cat $(comando) \
+		| sed -n '$(METADATA_CONTENT_BEGIN),$(METADATA_CONTENT_END)p' \
+		| awk '/$(CONTENT_TAG_CATEGORY)|$(CONTENT_TAG_DESCRIPTION)/' \
+		| nawk 'BEGIN{print "$(basename $(notdir $(comando)))$(CONTENT_FIELD_SEPARATOR)" } {print $$0}' \
+		| sed -E 's/^\#\# ($(CONTENT_TAG_CATEGORY))\: (([[:alnum:]]|[[:space:]]|[[:punct:]])+)$$/\2\$(CONTENT_FIELD_SEPARATOR)/g' \
+		| sed -E 's/^\#\# ($(CONTENT_TAG_DESCRIPTION))\: (([[:alnum:]]|[[:space:]]|[[:punct:]])+)$$/\2;/g' \
+		| tr --delete '\n' | tr ';' '\n' \
 		>> $@;\
 	)
 
@@ -40,35 +43,38 @@ $(DOC_LINUX).txt: $(DOC_COMANDOS_LINUX)
 $(DOC_APPS).txt: $(DOC_COMANDOS_APPS)
 	@$(TRUNCATE_CLEAR_CONTENT) $@
 	@$(foreach comando, $^,\
-		cat $(comando) | \
-		sed -n '$(CONTENT_NUMBER_LINE_CATEGORY),$(CONTENT_NUMBER_LINE_DESCRIPTION)p' | \
-		nawk 'BEGIN{print "$(basename $(notdir $(comando)))|" } {print $$0}' | \
-		sed -E 's/^\#\# ($(CONTENT_TAG_CATEGORY))\: (([[:alnum:]]|[[:space:]]|[[:punct:]])+)$$/\2\|/g' | \
-		sed -E 's/^\#\# ($(CONTENT_TAG_DESCRIPTION))\: (([[:alnum:]]|[[:space:]]|[[:punct:]])+)$$/\2;/g' | \
-		tr --delete '\n' | tr ';' '\n' \
+		cat $(comando) \
+		| sed -n '$(METADATA_CONTENT_BEGIN),$(METADATA_CONTENT_END)p' \
+		| awk '/$(CONTENT_TAG_CATEGORY)|$(CONTENT_TAG_DESCRIPTION)/' \
+		| nawk 'BEGIN{print "$(basename $(notdir $(comando)))|" } {print $$0}' \
+		| sed -E 's/^\#\# ($(CONTENT_TAG_CATEGORY))\: (([[:alnum:]]|[[:space:]]|[[:punct:]])+)$$/\2\|/g' \
+		| sed -E 's/^\#\# ($(CONTENT_TAG_DESCRIPTION))\: (([[:alnum:]]|[[:space:]]|[[:punct:]])+)$$/\2;/g' \
+		| tr --delete '\n' | tr ';' '\n' \
 		>> $@;\
 	)
 
 $(DOC_NOTES).txt: $(DOC_NOTES_FILES)
 	@$(TRUNCATE_CLEAR_CONTENT) $@
 	@$(foreach nota, $^,\
-		cat $(nota) | \
-		sed -n '$(CONTENT_NUMBER_LINE_CATEGORY),$(CONTENT_NUMBER_LINE_DESCRIPTION)p' | \
-		nawk 'BEGIN{print "$(basename $(notdir $(nota)))|" } {print $$0}' | \
-		sed -E 's/^\#\+($(CONTENT_TAG_CATEGORY))\: (([[:alnum:]]|[[:space:]]|[[:punct:]])+)$$/\2\|/g' | \
-		sed -E 's/^\#\+($(CONTENT_TAG_DESCRIPTION))\: (([[:alnum:]]|[[:space:]]|[[:punct:]])+)$$/\2;/g' | \
-		tr --delete '\n' | tr ';' '\n' \
+		cat $(nota) \
+		| awk '/$(CONTENT_TAG_CATEGORY)|$(CONTENT_TAG_DESCRIPTION)/' \
+		| nawk 'BEGIN{print "$(basename $(notdir $(nota)))|" } {print $$0}' \
+		| sed -E 's/^\#\+($(CONTENT_TAG_CATEGORY))\: (([[:alnum:]]|[[:space:]]|[[:punct:]])+)$$/\2\|/g' \
+		| sed -E 's/^\#\+($(CONTENT_TAG_DESCRIPTION))\: (([[:alnum:]]|[[:space:]]|[[:punct:]])+)$$/\2;/g' \
+		| tr --delete '\n' | tr ';' '\n' \
 		>> $@;\
 	)
 
 ##@ Listar documentación
 l linux-commands: $(DOC_LINUX).txt ## Listado Comandos de terminal Linux
 	@echo 'Lista de Comandos'
-	@cat $< | $(SORT_BY_COLUMN) 2 | $(NAWK_ORDER_FIELDS) | $(NAWK_HEADERS)
+	@cat $< | $(SORT_BY_COLUMN) 2 | $(NAWK_ORDER_FIELDS) | $(NAWK_HEADERS) \
+	| csview --delimiter='$(CONTENT_FIELD_SEPARATOR)'
 
 a applications-commands: $(DOC_APPS).txt ## Listado Comandos de Aplicaciones
 	@echo 'Lista de Comandos para Aplicaciones'
-	@cat $< | $(SORT_BY_COLUMN) 2 | $(NAWK_ORDER_FIELDS) | $(NAWK_HEADERS)
+	@cat $< | $(SORT_BY_COLUMN) 2 | $(NAWK_ORDER_FIELDS) | $(NAWK_HEADERS) \
+	| csview --delimiter='$(CONTENT_FIELD_SEPARATOR)'
 
 n notes: $(DOC_NOTES).txt ## Notas sugeridas
 	@$(MENU_SHOW_NOTES) 3>&1 1>&2 2>&3 \
@@ -147,10 +153,25 @@ $(COMANDOS_APPS):
 h help: ## Mostrar menú de ayuda
 	@awk 'BEGIN {FS = ":.*##"; printf "\nOpciones para usar:\n  make \033[36m\033[0m\n"} /^[$$()% 0-9a-zA-Z_-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
 
-install-utils:
+install-utils: install-bat install-rust-cargo
+configure-utils: configure-rust-cargo
+
+install-bat:
 ifeq ("$(shell which bat)","")
 	@sudo aptitude install -y bat
 endif
+
+install-rust-cargo:
+ifeq ("$(shell which cargo)","")
+	@sudo aptitude install -y cargo \
+	&& cargo install csview
+endif
+
+# TODO: contemplar en el remove
+configure-rust-cargo:
+	echo $(RUST_CARGO_PATH) >> $(BASH_ALIASES_FILE) \
+	&& chmod u+x $(UTILS_DIRECTORY)/update-bash-aliases \
+	&& $(UTILS_DIRECTORY)/update-bash-aliases
 
 ri re-install: remove install
 
@@ -159,7 +180,7 @@ ifeq ($(APP_INSTALLED), true)
 	$(error La aplicación ya está instalada)
 endif
 
-i install: check-installed install-utils ## Instalar aplicación
+i install: check-installed install-utils configure-utils ## Instalar aplicación
 	@$(BOX_CONFIRM_INSTALL) \
 	&& test $(EXIT_STATUS) -eq $(EXIT_STATUS_SUCCESS) \
 	&& (echo $(BASH_ALIAS) >> $(BASH_ALIASES_FILE) \
