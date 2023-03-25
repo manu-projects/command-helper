@@ -19,3 +19,10 @@ BASH_ALIAS_ESCAPE_SLASH=$(subst /,\/,$(BASH_ALIAS))
 POPUP_EDIT = sh ./scripts/edit-popup.sh $(TEXT_EDITOR)
 
 APP_INSTALLED=$(shell grep -q "^alias ?='make.*APP_AUTHOR=neverkas" ~/.bash_aliases && echo true)
+
+# es necesario el slash invertido '\' para escalar el caracter '/'
+# porque se utiliza en linux-create-doc en el comando sed
+DATE_NOW_FORMAT=$(shell date +"%d\/%m\/%Y")
+
+PATTERN_METADATA_DATE=(\#\# ACTUALIZADO:) ([[:digit:]]{1,2}\/[[:digit:]]{1,2}\/[[:digit:]]{4})
+UPDATE_METADATA_DATE=sed -i -E 's/$(PATTERN_METADATA_DATE)/\1 $(DATE_NOW_FORMAT)/i'

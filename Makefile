@@ -129,20 +129,23 @@ app-edit-shortcuts:
 #
 # 3. el comando whiptail escribe sobre stdout (fd 2) por tanto creamos un nuevo File Descriptor (3),
 # que apunta al stdout (fd 1), para luego redireccionar el stdout->stderr, y redireccionar el stderr->nuevo fd 3 (que apunta al stdout)
+
 linux-create-doc:
 	@whiptail --inputbox "Escriba el nombre del comando" 25 80 --title "Crear Documentación de Linux" 3>&1 1>&2 2>&3 \
 	| xargs -I % sh -c \
 	"$(COPY_NOT_OVERWRITE) $(DOC_COMMANDS_LINUX_DIRECTORY)/.template $(DOC_COMMANDS_LINUX_DIRECTORY)/%.$(DOC_COMMANDS_EXTENSION); \
 	$(COPY_NOT_OVERWRITE) $(DOC_SHORTCUTS_LINUX_DIRECTORY)/.template $(DOC_SHORTCUTS_LINUX_DIRECTORY)/%.$(DOC_SHORTCUTS_EXTENSION); \
+	$(UPDATE_METADATA_DATE) $(DOC_COMMANDS_LINUX_DIRECTORY)/%.$(DOC_COMMANDS_EXTENSION); \
 	echo 'Se creó el archivo $(DOC_COMMANDS_LINUX_DIRECTORY)/%.$(DOC_COMMANDS_EXTENSION);' \
 	echo 'Se creó el archivo $(DOC_SHORTCUTS_LINUX_DIRECTORY)/%.$(DOC_SHORTCUTS_EXTENSION);'"
 
 # TODO: lógica repetida con linux-create-doc
 app-create-doc:
-	@whiptail --inputbox "Escriba el nombre del comando" 25 80 --title "Crear Documentación de Linux" 3>&1 1>&2 2>&3 \
+	@whiptail --inputbox "Escriba el nombre del comando" 25 80 --title "Crear Documentación App de Linux" 3>&1 1>&2 2>&3 \
 	| xargs -I % sh -c \
 	"$(COPY_NOT_OVERWRITE) $(DOC_COMMANDS_APPS_DIRECTORY)/.template $(DOC_COMMANDS_APPS_DIRECTORY)/%.$(DOC_COMMANDS_EXTENSION); \
 	$(COPY_NOT_OVERWRITE) $(DOC_SHORTCUTS_APPS_DIRECTORY)/.template $(DOC_SHORTCUTS_APPS_DIRECTORY)/%.$(DOC_SHORTCUTS_EXTENSION); \
+	$(UPDATE_METADATA_DATE) $(DOC_COMMANDS_APPS_DIRECTORY)/%.$(DOC_COMMANDS_EXTENSION); \
 	echo 'Se creó el archivo $(DOC_COMMANDS_APPS_DIRECTORY)/%.$(DOC_COMMANDS_EXTENSION);' \
 	echo 'Se creó el archivo$(DOC_SHORTCUTS_APPS_DIRECTORY)/%.$(DOC_SHORTCUTS_EXTENSION);'"
 
