@@ -68,13 +68,21 @@ $(DOC_NOTES).txt: $(DOC_NOTES_FILES)
 ##@ Listar documentación
 l linux-commands: $(DOC_LINUX).txt ## Listado Comandos de terminal Linux
 	@echo 'Lista de Comandos'
+ifeq ($(CSVIEW_TOOL), true)
 	@cat $< | $(SORT_BY_COLUMN) 2 | $(NAWK_ORDER_FIELDS) | $(NAWK_HEADERS) \
 	| csview --delimiter='$(CONTENT_FIELD_SEPARATOR)'
+else
+	@cat $< | $(SORT_BY_COLUMN) 2 | $(NAWK_ORDER_FIELDS) | $(NAWK_HEADERS) | $(COLUMNS)
+endif
 
 a applications-commands: $(DOC_APPS).txt ## Listado Comandos de Aplicaciones
 	@echo 'Lista de Comandos para Aplicaciones'
+ifeq ($(CSVIEW_TOOL), true)
 	@cat $< | $(SORT_BY_COLUMN) 2 | $(NAWK_ORDER_FIELDS) | $(NAWK_HEADERS) \
 	| csview --delimiter='$(CONTENT_FIELD_SEPARATOR)'
+else
+	@cat $< | $(SORT_BY_COLUMN) 2 | $(NAWK_ORDER_FIELDS) | $(NAWK_HEADERS) | $(COLUMNS)
+endif
 
 n notes: $(DOC_NOTES).txt ## Notas sugeridas
 	@$(MENU_SHOW_NOTES) 3>&1 1>&2 2>&3 \
@@ -153,8 +161,13 @@ $(COMANDOS_APPS):
 h help: ## Mostrar menú de ayuda
 	@awk 'BEGIN {FS = ":.*##"; printf "\nOpciones para usar:\n  make \033[36m\033[0m\n"} /^[$$()% 0-9a-zA-Z_-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
 
+ifeq ($(CSVIEW_TOOL), true)
 install-utils: install-bat install-rust-cargo
 configure-utils: configure-rust-cargo
+else
+install-utils: install-bat
+configure-utils:
+endif
 
 install-bat:
 ifeq ("$(shell which bat)","")

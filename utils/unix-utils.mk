@@ -5,7 +5,7 @@ CONTENT_FIELD_SEPARATOR=|
 
 CONTENT_HEADERS="Comando|Categoría|Descripción"
 NAWK_HEADERS=nawk 'BEGIN{print $(CONTENT_HEADERS)} {print $$0}'
-#NAWK_HEADERS=nawk 'BEGIN{print $(CONTENT_HEADERS)} {print $$0}' | column -t -s "|"
+COLUMNS=column -t -s "|"
 
 # en GNU Make debemos escapar el $ que utiliza awk para los parámetros por eso $$1 $$2 en vez de $1 ó $2,
 # para que lo tome como un caracter y no lo tome una referencia a una macro de GNU Make
