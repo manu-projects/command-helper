@@ -1,7 +1,7 @@
 ## ####################################################################
 ## ACTUALIZADO: 24/03/2023
 ##
-## CATEGORIA: imprimir información de archivos y directorios
+## CATEGORIA: listar archivos y directorios
 ## DESCRIPCION: mostrar nombre y tipo de archivo, permisos de acceso, ...
 ##
 ## OBSERVACIONES: -

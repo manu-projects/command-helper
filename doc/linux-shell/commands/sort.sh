@@ -1,7 +1,7 @@
 ## ####################################################################
 ## ACTUALIZADO: 24/03/2023
 ##
-## CATEGORIA: imprimir información de archivos
+## CATEGORIA: contenido de archivos
 ## DESCRIPCION: ordenar contenido por criterios (número de columna, repetidos, no repetidos)
 ##
 ## OBSERVACIONES: -

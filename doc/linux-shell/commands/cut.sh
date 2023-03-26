@@ -1,7 +1,7 @@
 ## ####################################################################
 ## ACTUALIZADO: 24/03/2023
 ##
-## CATEGORIA: imprimir información de archivos
+## CATEGORIA: contenido de archivos
 ## DESCRIPCION: cortar(eliminar) partes del contenido (por campo, byte ó caracter)
 ##
 ## OBSERVACIONES: -

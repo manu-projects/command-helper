@@ -1,8 +1,8 @@
 ## ####################################################################
 ## ACTUALIZADO: 24/03/2023
 ##
-## CATEGORIA: imprimir información de archivos
-## DESCRIPCION: muestra el contenido en columnas
+## CATEGORIA: transferencia de datos
+## DESCRIPCION: operaciones de transferencia de datos (get, post, put, delete)
 ##
 ## OBSERVACIONES: -
 ## ####################################################################
