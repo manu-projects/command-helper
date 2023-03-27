@@ -68,4 +68,6 @@
    3) https://linuxopsys.com/
    4) https://geekland.eu/category/linux-2/
    5) https://phoenixnap.com/kb/tag/linux
+   6) https://linuxize.com/tags/terminal/
+   7) https://www.redhat.com/sysadmin/
    #+END_COMMENT
