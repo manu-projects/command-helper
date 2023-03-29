@@ -1,0 +1,93 @@
+# Utilities volume of POSIX.1-2017
+#
+# - POSIX (Portable Operating System Interface) is a "set of standard operating system interfaces" based on "the Unix operating system"
+# - The standard defines a "command interpreter" (shell) and "common utility programs"
+#
+# Referencias
+# 1. https://pubs.opengroup.org/onlinepubs/9699919799/
+# 2. https://pubs.opengroup.org/onlinepubs/9699919799/idx/utilities.html
+
+## Standard Utilities
+alias: define or display aliases
+ar: create and maintain library archives
+awk: pattern scanning and processing language
+basename: Return non-directory portion of pathname
+bc: arbitrary-precision arithmetic language
+bg: run jobs in the background
+cat: Concatenate and print files
+cal: print a calendar
+cut: cut out selected fields of each line of a file
+cd: Change working directory
+chgrp: Change file group ownership
+chmod: Change file modes
+chown: Change file ownership
+cp: Copy files
+date: write the date and time
+dd: Convert and copy a file
+df: Report free disk space
+    diff - compare two files
+dirname: Return directory portion of pathname
+du: Estimate file space usage
+echo: write arguments to standard output
+find: Find files
+fg: run jobs in the foreground
+grep: search a file for a pattern
+head: copy the first part of files
+id: return user identity
+jobs:  display status of jobs in the current session
+kill: terminate or signal processes
+ln: Link files
+ls: List directory contents
+man: display system documentation
+make: maintain, update, and regenerate groups of programs (DEVELOPMENT)
+mkdir: Make directories
+more: display files on a page-by-page basis
+mv: Move files
+pwd: Return working directory name
+printf: write formatted output
+ps: report process status
+pwd: return working directory name
+read: read from standard input into shell variables
+renice: set nice values of running processes
+rm: Remove directory entries
+rmdir: Remove directories
+sed: stream editor
+sh: Shell, the standard command language interpreter
+sleep: - suspend execution for an interval
+sort: - sort, merge, or sequence check text files
+tail: - copy the last part of a file
+tee: duplicate standard input
+test: Evaluate expression
+time: time a simple command
+touch: Change file access and modification times
+tr: translate characters
+tty: return the name of the terminal
+unalias: remove alias definitions
+uname: return system name
+uniq: report or filter out repeated lines in a file
+vi: screen-oriented (visual) display editor
+wait: await process completion
+wc: word, line, and byte or character count
+who: display who is on the system
+xargs: construct argument lists and invoke utility
+
+## Built-In Utilities
+# - Any of the Standard Utilities may be implemented as Regular Built-In utilities "within the command language interpreter"
+# - This is "usually done to increase the performance of frequently used utilities"
+# or to achieve functionality that would be more difficult in a separate environment
+alias
+bg
+cd
+jobs
+kill
+pwd
+read
+unalias
+wait
+
+# They can invoke and access to Standard Utilities and Regular Built-ins Utilities
+find
+nice
+nohup
+time
+xargs

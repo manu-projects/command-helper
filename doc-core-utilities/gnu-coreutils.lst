@@ -1,0 +1,118 @@
+# The GNU Core Utilities are the basic file, shell and text manipulation utilities of the GNU operating system.
+# Like the rest of the GNU system, these programs mostly conform to POSIX, with BSD and other extensions
+#
+# New features need to
+# - follow POSIX rules
+# - be portable/should not break portability
+#
+# GNU Coreutils Project started in by merging of Fileutils, Shellutils and Textutils projects
+# These are the core utilities which are expected to exist on every operating system.
+# - fileutils (cp, mv, ls, rm, du, dd df, mkdir, shred)
+# - shellutils (date, echo, pwd, sleep, id, printf, tee, whoami)
+# - texutils (cat, tr, sort, wc, md5sum, head, uniq)
+#
+#
+# Referencias:
+# 1. https://www.gnu.org/software/coreutils/manual/coreutils.html
+# 2. https://github.com/coreutils/coreutils/tree/master/src
+#
+# Nota: Se agregaron sólo los comandos que más utilizo, revisar la documentación oficial para más información
+
+## OUTPUT OF ENTIRE FILES
+cat: Concatenate and write files
+
+## OUTPUT OF PARTS OF FILES
+head: Output the first part of files
+tail: Output the last part of files
+
+## SUMMARIZING FILES
+wc: Print newline, word, and byte counts
+
+## OPERATING ON SORTED FILES
+sort: Sort text files
+uniq: Uniquify files
+
+## OPERATING ON FIELDS
+cut: Print selected parts of lines
+
+## OPERATING ON CHARACTERS
+tr: Translate, squeeze, and/or delete characters
+
+## DIRECTORY LISTING
+ls: List directory contents
+dir: Briefly list directory contents
+vdir: Verbosely list directory contents
+
+## BASIC OPERATIONS
+cp: Copy files and directories
+dd: Convert and copy a file
+mv: Move (rename) files
+rm: Remove files or directories
+shred: Remove files more securely
+
+## SPECIAL FILE TYPES
+ln: Make links between files
+mkdir: Make directories
+rmdir: Remove empty directories
+
+## CHANGING FILE ATTRIBUTES
+chown: Change file owner and group
+chgrp: Change group ownership
+chmod: Change access permissions
+touch: Change file timestamps
+
+## FILE SPACE USAGE
+df: Report file system space usage
+du: Estimate file space usage
+stat: Report file or file system status
+truncate: Shrink or extend the size of a file
+
+## PRINTING TEXT
+echo: Print a line of text
+printf: Format and print data
+
+## CONDITIONS
+test: Check file types and compare values
+
+## REDIRECTION
+tee: Redirect output to multiple files or processes
+
+## FILE NAME MANIPULATION
+basename: Strip directory and suffix from a file name
+dirname: Strip last file name component
+mktemp: Create temporary file or directory
+realpath: Print the resolved file name
+
+## WORKING CONTEXT
+pwd: Print working directory
+tty: Print file name of terminal on standard input
+
+## USER INFORMATION
+id: Print user identity
+whoami: Print effective user name
+groups: Print group names a user is in
+users: Print login names of users currently logged in
+who: Print who is currently logged in
+
+## SYSTEM CONTEXT
+date: Print or set system date and time
+arch: Print machine hardware name
+nproc: Print the number of available processors
+uname: Print system information
+hostname: Print or set system name
+uptime: Print system uptime and load
+
+## MODIFIED COMMAND INVOCATION
+chroot: Run a command with a different root directory
+nice: Run a command with modified niceness
+nohup: Run a command immune to hangups
+timeout: Run a command with a time limit
+
+## PROCESS CONTROL
+kill: Send a signal to processes
+
+## DELAYING
+sleep: Delay for a specified time
+
+## NUMERIC OPERATIONS
+seq: Print numeric sequences

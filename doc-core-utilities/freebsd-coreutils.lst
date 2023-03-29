@@ -1,0 +1,58 @@
+# Similar utilities to most of these exist in the FreeBSD base system,
+# but many of "the GNU versions have added functionality" that is useful.
+#
+# Referencias
+# 1. https://www.freebsd.org/ports/
+# 2. https://www.freshports.org/sysutils/coreutils/
+
+basename
+cat
+chgrp
+chmod
+chown
+chroot
+cp
+cut
+date
+dd
+df
+dir
+dirname
+du
+echo
+groups
+head
+hostname
+id
+kill
+ln
+ls
+md5sum
+mkdir
+mv
+nice
+nohup
+printf
+pwd
+rm
+rmdir
+seq
+shred
+sleep
+sort
+stat
+su
+tail
+tee
+test
+touch
+tr
+tty
+uname
+uniq
+uptime
+users
+vdir
+wc
+who
+whoami

@@ -1,0 +1,98 @@
+# Util-Linux is a standard package distributed by the Linux Kernel Organization for use as part of the Linux operating system.
+
+# Referencias
+# 1. https://github.com/util-linux/util-linux
+
+# file system
+cat
+chmod
+chown
+chgrp
+cp
+dd
+du
+df
+ln
+ls
+mkdir
+mv
+pwd
+rm
+rmdir
+tee
+touch
+
+# processes
+bg
+fg
+kill
+nice
+ps
+time
+
+# user environment
+exit
+uname
+who
+
+# text processing
+awk
+basename
+cut
+diff
+dirname
+head
+more
+printf
+read
+sed
+sort
+tail
+tr
+uniq
+vi
+wc
+xargs
+
+# shell bultins
+alias
+cd
+echo
+test
+unset
+wait
+
+# searching
+find
+grep
+
+# documentation
+man
+
+# software development
+ar
+make
+
+# miscellaneous
+bc
+cal
+sleep
+
+# otros
+lsblk
+blkid
+mount
+rename
+renice
+script
+scriptreplay
+su
+swapoff
+swapon
+umount
+whereis
+column
+
+# legacy
+fdisk
+reset
