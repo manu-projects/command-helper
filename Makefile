@@ -1,6 +1,7 @@
 -include utils/utils.mk
 -include utils/unix-utils.mk
 -include config.cfg
+-include audio.cfg
 -include utils/menus.mk
 
 #SHELL=/bin/bash
@@ -87,6 +88,19 @@ endif
 n notes: $(DOC_NOTES).txt ## Notas sugeridas
 	@$(MENU_SHOW_NOTES) 3>&1 1>&2 2>&3 \
 	| xargs -I % $(EDITOR_NOTE) $(DOC_NOTES_DIRECTORY)/%.$(DOC_NOTES_EXTENSION)
+
+##@ Listar documentación (con audio)
+# TODO: dependencias de instalación
+generate-audios: $(DOC_LINUX).txt ## Listado Comandos de terminal Linux
+	@echo "Generando `cat $< | wc --lines` audios.."
+	@. ~/.venv/bin/activate \
+	&& cat $< \
+	| awk --field-separator='|' '{print $$1"|el comando " $$1 " está clasificado para " $$2 ", su funcionalidad es " $$3}' \
+	| mimic3 --voice $(MIMIC_VOICE) --csv --csv-delimiter=$(MIMIC_CSV_DELIMITER) --output-dir=$(MIMIC_OUTPUT_DIR) \
+
+# TODO: mejorar output
+speak-linux-commands: $(wildcard audio/*.wav)##
+	@aplay $^
 
 ##@ Creación y Edición de documentación
 
@@ -182,6 +196,9 @@ ifeq ("$(shell which cargo)","")
 	@sudo aptitude install -y cargo \
 	&& cargo install csview
 endif
+
+# rust-install-dependencies:
+#	cargo install csview
 
 # TODO: contemplar en el remove
 configure-rust-cargo:
