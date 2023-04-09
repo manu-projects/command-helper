@@ -3,6 +3,7 @@
 -include config.cfg
 -include audio.cfg
 -include utils/menus.mk
+-include install.mk
 
 #SHELL=/bin/bash
 
@@ -182,56 +183,6 @@ $(COMANDOS_APPS):
 ##@ Utilidades
 h help: ## Mostrar menú de ayuda
 	@awk 'BEGIN {FS = ":.*##"; printf "\nOpciones para usar:\n  make \033[36m\033[0m\n"} /^[$$()% 0-9a-zA-Z_-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
-
-ifeq ($(CSVIEW_TOOL), true)
-install-utils: install-bat install-rust-cargo
-configure-utils: configure-rust-cargo
-else
-install-utils: install-bat
-configure-utils:
-endif
-
-install-bat:
-ifeq ("$(shell which bat)","")
-	@sudo aptitude install -y bat
-endif
-
-install-rust-cargo:
-ifeq ("$(shell which cargo)","")
-	@sudo aptitude install -y cargo \
-	&& cargo install csview
-endif
-
-# rust-install-dependencies:
-#	cargo install csview
-
-# TODO: contemplar en el remove
-configure-rust-cargo:
-	echo $(RUST_CARGO_PATH) >> $(BASH_ALIASES_FILE) \
-	&& chmod u+x $(UTILS_DIRECTORY)/update-bash-aliases \
-	&& $(UTILS_DIRECTORY)/update-bash-aliases
-
-ri re-install: remove install
-
-check-installed:
-ifeq ($(APP_INSTALLED), true)
-	$(error La aplicación ya está instalada)
-endif
-
-i install: check-installed install-utils configure-utils ## Instalar aplicación
-	@$(BOX_CONFIRM_INSTALL) \
-	&& test $(EXIT_STATUS) -eq $(EXIT_STATUS_SUCCESS) \
-	&& (echo $(BASH_ALIAS) >> $(BASH_ALIASES_FILE) \
-		&& chmod u+x $(UTILS_DIRECTORY)/update-bash-aliases \
-		&& $(UTILS_DIRECTORY)/update-bash-aliases) \
-	|| true
-
-r remove: ## Desinstalar aplicación
-	@$(BOX_CONFIRM_UNINSTALL) \
-	&& test $(EXIT_STATUS) -eq $(EXIT_STATUS_SUCCESS) \
-	&& sed -i "/^alias $(BASH_ALIAS_SYMBOL)='make.*APP_AUTHOR=$(APP_AUTHOR)/d" $(BASH_ALIASES_FILE) \
-	&& $(UTILS_DIRECTORY)/update-bash-aliases \
-	|| true
 
 # %:
 # 	$(error NO existe el comando)
