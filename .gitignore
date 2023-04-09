@@ -1,4 +1,4 @@
 applications.txt
 linux-shell.txt
 notes.txt
-audio/
+*.wav

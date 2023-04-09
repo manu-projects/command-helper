@@ -90,17 +90,22 @@ n notes: $(DOC_NOTES).txt ## Notas sugeridas
 	| xargs -I % $(EDITOR_NOTE) $(DOC_NOTES_DIRECTORY)/%.$(DOC_NOTES_EXTENSION)
 
 ##@ Listar documentación (con audio)
-# TODO: dependencias de instalación
-generate-audios: $(DOC_LINUX).txt ## Listado Comandos de terminal Linux
-	@echo "Generando `cat $< | wc --lines` audios.."
-	@. ~/.venv/bin/activate \
-	&& cat $< \
-	| awk --field-separator='|' '{print $$1"|el comando " $$1 " está clasificado para " $$2 ", su funcionalidad es " $$3}' \
-	| mimic3 --voice $(MIMIC_VOICE) --csv --csv-delimiter=$(MIMIC_CSV_DELIMITER) --output-dir=$(MIMIC_OUTPUT_DIR) \
 
-# TODO: mejorar output
-speak-linux-commands: $(wildcard audio/*.wav)##
-	@aplay $^
+# TODO: dependencias de instalación
+# Nota: utilizamos el . (punto) en vez del comando `source` para aplicar los cambios en la Shell de Bash desde GNU Make
+generate-audio: $(DOC_LINUX).txt ##
+ifeq ("$(LANGUAGE_AUDIO)", "spanish")
+	@echo "Generando `cat $< | wc --lines` audios.."
+	@. $(MIMIC_BIN_ENVIRONMENT) \
+	&& cat $< | $(PARSE_TEXT_TO_SPEECH_SPANISH) \
+	| $(TEXT_TO_SPEECH_SPANISH) --output-dir=$(MIMIC_SPANISH_OUTPUT_DIR)/$(DOC_LINUX)
+endif
+
+speak-linux-commands: ##
+ifeq ("$(LANGUAGE_AUDIO)", "spanish")
+	@ls $(MIMIC_SPANISH_OUTPUT_DIR)/$(DOC_LINUX)/*.wav \
+	| xargs -I{} bash -c 'printf "Escuchando audio del comando `basename {}`..\n"; aplay {} --quiet'
+endif
 
 ##@ Creación y Edición de documentación
 
