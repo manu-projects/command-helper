@@ -6,7 +6,7 @@ on:
 
 jobs:
   testing-trigger:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest # ó de forma local: self-hosted
     steps:
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v2.1.1
