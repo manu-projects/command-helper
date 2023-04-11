@@ -29,7 +29,7 @@ seq 5 # 1\n 2\n .. 4\n 5\n
 seq 1 10 #  1\n 2\n .. 9\n 10\n
 seq 5 10 #  5\n 6\n .. 9\n 10\n
 
-# alternativas a lo anterior, utilizando el ciclo "for" de la shell de bash
+# alternativas a lo anterior, utilizando el ciclo "for" de la bash shell
 for i in `seq 1 5`; do echo $i; done;  # 1\n .. 5\n
 for i in $(seq 1 5); do echo $i; done; # 1\n .. 5\n
 
@@ -54,11 +54,12 @@ seq 1 10 | xargs
 # 4.1 Crear múltiples archivos con una numeración del 1 al 10 (Ej. archivo-1, archivo-2, .., archivo-10)
 
 # alternativa (1) sin `seq`
-echo archivo-{1..10}.txt | xargs --verbose touch
-
-# alternativa (2) sin `seq`
 # - el comando `touch` no tiene la opción --verbose, por tanto éste no imprimiría que archivos fueron creados
 touch archivo-{1..10}.txt
+
+# alternativa (2) sin `seq`
+# (el resultado será lo mismo que ejecutar `touch archivo-1.txt archivo-2.txt .. archivo-10.txt`)
+echo archivo-{1..10}.txt | xargs --verbose touch
 
 # alternativa (3) con `seq`
 seq --format="archivo-%g.txt" 10 | xargs --verbose touch
@@ -74,6 +75,7 @@ seq --format="carpeta-%g" 10 | xargs mkdir --verbose
 # (por tanto el comando xargs se ejecutará N veces, siendo N la longitud de la secuencia de números que devuelva `seq`)
 
 # si queremos un comando más genérico que.. `mkdir -v carpeta-1; mkdir -v carpeta-2; ..; mkdir -v carpeta-10`
+# (con el ; indicamos el fin de un comando o de varios agrupados, cada comando se ejecutará de forma independiente y en distintos instantes de tiempo)
 seq 10 | xargs -I {} mkdir "carpeta-{}" --verbose
 
 # (alternativa utilizando la opción --max-args del comando xargs)
@@ -91,7 +93,7 @@ seq 1 2 10 # (incremental=2) el resultado sería 1\n 3\n 5\n 7\n 9\n
 seq 1 3 10 # (incremental=3) el resultado sería 1\n 4\n 7\n
 seq 1 4 10 # (incremental=4) el resultado sería 1\n 5\n
 
-# alternativas a los ej anteriores, usando el ciclo for de la shell de bash
+# alternativas a los ej anteriores, usando el ciclo for de la bash shell
 # similar a un for(i=1; n<=10, i+=2) ó.. for(inicial=1, salto=2, final=10; inicial<=final; inicial+=salto)
 for i in {1..10..2}; do echo $i; done; # resultado sería 1\n 3\n 5\n 7\n 9\n
 #
