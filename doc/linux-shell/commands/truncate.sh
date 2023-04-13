@@ -1,7 +1,7 @@
 ## ####################################################################
 ## ACTUALIZADO: 24/03/2023
 ##
-## CATEGORIA: operaciones con archivos
+## CATEGORIA: operaciones sobre archivos
 ## DESCRIPCION: recorta el tamaño de un archivo (truncar un archivo)
 ##
 ## OBSERVACIONES: se puede probar con el comando find, éste busca archivos por su tamaño

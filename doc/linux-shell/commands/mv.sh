@@ -1,7 +1,7 @@
 ## ####################################################################
 ## ACTUALIZADO: 24/03/2023
 ##
-## CATEGORIA: operaciones con archivos y directorios
+## CATEGORIA: operaciones sobre archivos y directorios
 ## DESCRIPCION: mover archivos y directorios
 ##
 ## OBSERVACIONES: -
