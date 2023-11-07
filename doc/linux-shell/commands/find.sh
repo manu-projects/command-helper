@@ -8,6 +8,16 @@
 ## ####################################################################
 
 # .............................................
+# EJEMPLOS: OTROS
+# .............................................
+
+# 1. Eliminar archivos (más rápido que el comando rm)
+#
+# - opción (-print): imprime por pantalla los archivos que encuentra
+find . -type f -delete -print
+
+
+# .............................................
 # EJEMPLOS: BUSCAR POR NOMBRE ó TIPO DE ARCHIVO
 # .............................................
 
