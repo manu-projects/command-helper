@@ -7,8 +7,13 @@
 ## OBSERVACIONES: -
 ## ####################################################################
 
+# Contar cantidad de archivos cuando hay cientos de archivos
+#
+# (opción -f): lista los archivos sin ordenarlos por algún criterio
+ls -f | wc -l
+
 # Contar cantidad de archivos/directorios
-ls | wc -c
+ls | wc -l
 
 # Filtrar las entradas del directorio sin usar `grep`
 ls *pdf
