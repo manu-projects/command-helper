@@ -744,3 +744,52 @@
 *** Referencias Issues
     1. [[https://stackoverflow.com/questions/11287861/how-to-check-if-a-file-contains-a-specific-string-using-bash][How to check if a file contains a specific string using bash (stackoverflow.com)]]
     2. [[https://stackoverflow.com/questions/30078281/raise-error-in-a-bash-script][Raise error in a bash script (stackoverflow.com)]]
+* TODO GNU Make - Caracter # de comentario en Macros y Funciones Shell
+** Caracter # en una Macro
+# es necesario el slash invertido '\'  para escapar el caracter '#' porque GNU Make interpreta los # como comentarios,
+# por tanto quedaría comentado el valor asignado a ésta macro
+#+BEGIN_SRC makefile
+PATTERN_METADATA_DATE=(\#\# ACTUALIZADO:) ([[:digit:]]{1,2}\/[[:digit:]]{1,2}\/[[:digit:]]{4})
+UPDATE_METADATA_DATE=sed -i -E 's/$(PATTERN_METADATA_DATE)/\1 $(DATE_NOW_FORMAT)/i'
+#+END_SRC
+** Caracter # en una función Shell
+# es necesario el slash invertido '\'  para escapar el caracter '#' porque GNU Make interpreta los # como comentarios,
+# por tanto quedaría comentado parte de la función $(shell ...)
+# y GNU Make lanzaría un error porque NO cerrarían los párentesis ) porque.. quedarón comentados...
+#+BEGIN_SRC makefile
+LINE_METADATA_OBSERVACIONES=$(shell grep -n '\#\# OBSERVACIONES:' $(DOC_COMMANDS_LINUX_DIRECTORY)/.template | cut --delimiter=':' --fields=1)
+#+END_SRC
+* TODO Shell - Comando grep para obtener número de linea de un archivo
+#+BEGIN_SRC makefile
+LINE_METADATA_OBSERVACIONES=$(shell grep -n '\#\# OBSERVACIONES:' $(DOC_COMMANDS_LINUX_DIRECTORY)/.template | cut --delimiter=':' --fields=1)
+
+BAT=bat $(METADATA_OBSERVACIONES) \
+		--line-range $(LINE_METADATA_OBSERVACIONES):$(LINE_METADATA_OBSERVACIONES) \
+		--highlight-line $(LINE_METADATA_OBSERVACIONES) \
+		--line-range $(NUMBER_LINE_BEGIN_DOCUMENTATION):
+#+END_SRC
+
+* Eliminar Archivos de forma rápida
+** Solución 1 - Utilizar comando find
+  #+BEGIN_SRC shell
+    find . -type f -delete -print
+  #+END_SRC
+** Referencias
+1. https://askubuntu.com/questions/114969/is-there-any-faster-way-to-remove-a-directory-than-rm-rf
+2. https://serverfault.com/questions/319362/bash-find-command-verbose-output
+* Contar cientos de archivos de forma rápida
+** Solución 1 - Utilizar el comando ls sin criterio de ordenamiento
+  #+BEGIN_SRC shell
+    ls -f | wc -l
+  #+END_SRC
+** Referencias
+1. https://stackoverflow.com/questions/1427032/fast-linux-file-count-for-a-large-number-of-files
+* Conocer la ruta de un dispositivo celular conectado al sistema
+** Solución 1 - Utilizar comandos mount+grep
+  #+BEGIN_SRC shell
+    # 1. con el comando mount listamos todos los dispositivos montados en el sistema
+    # 2. con grep, filtramos la ruta del celular conectado
+    mount | grep  'gvfsd-fuse'
+  #+END_SRC
+** Referencias
+1. https://unix.stackexchange.com/questions/311763/how-do-i-cd-into-mounted-samsung-phone-through-bash
